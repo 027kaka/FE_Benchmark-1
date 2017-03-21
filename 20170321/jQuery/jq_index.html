@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>jQuery Test</title>
+</head>
+<style type="text/css">
+#example .contanier div{
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<body>
+<div id="example">
+	<button>+1</button>
+	<div class="contanier"></div>
+</div>
+<script src="./jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var text = '';
+		var content = 1;
+		for (var i = 0; i < 5000; i++) {
+			text += '<div>'+ content +'</div>';
+		}
+		$('#example .contanier').html(text)
+
+		$('button').click(function() {
+			content += 1;
+			console.time('test');
+			$('#example .contanier div').each(function(index, dom) {
+				$(dom).html(content);
+			})
+			console.timeEnd('test');
+		})
+	})
+</script>
+</body>
+</html>

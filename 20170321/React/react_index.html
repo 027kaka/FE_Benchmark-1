@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      #example .test{
+        float: left;
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+      }
+    </style>
+    <meta charset="utf-8">
+    <title>React Test</title>
+    <script src="./build/react.js"></script>
+    <script src="./build/react-dom.js"></script>
+    <script src="./build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+var Divs = React.createClass({
+  getInitialState: function() {
+    return {
+      content: 1
+    };
+  },
+  handleClick:function(){
+    console.time('test');
+    var num = parseInt(this.state.content) + 1;
+    this.setState({content: num});
+  },
+  componentDidUpdate:function(){
+    console.timeEnd('test');
+  },
+  render: function() {
+    var Divsdom=[],
+    conNum = this.state.content;
+    for(var i = 0;i<5000;i++){
+      Divsdom.push(<div key={i} className="test">{conNum}</div>);
+    }
+    return (
+      <div>
+        <button onClick={this.handleClick}>+1</button>
+        {Divsdom}
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <Divs/>,
+  document.getElementById('example')
+);
+    </script>
+  </body>
+</html>

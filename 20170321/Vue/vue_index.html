@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue Test</title>
+</head>
+<style type="text/css">
+#example .contanier div {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+</style>
+
+<body>
+    <div id="example">
+        <button @click="addDOM">+1</button>
+        <div class="contanier">
+            <div v-for='i in content'>{{i+x}}</div>
+        </div>
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+    var vm =  new Vue({
+        el:'#example',
+        data: {
+            text: '',
+            content: 5000,
+            x:0
+        },
+        updated:function(){
+            console.timeEnd('test');
+        },
+        methods: {
+            addDOM: function() {
+                console.time('test');
+                this.x +=1;
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>
